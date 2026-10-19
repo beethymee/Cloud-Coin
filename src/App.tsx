@@ -10,6 +10,8 @@ import { ProposalModal } from './components/ProposalModal';
 import { CompetitionModal } from './components/CompetitionModal';
 import { ApkInstallModal } from './components/ApkInstallModal';
 import { PublicLandingPage } from './components/PublicLandingPage';
+import { MobileDeviceFrame } from './components/MobileDeviceFrame';
+import { useTheme } from './hooks/useTheme';
 import {
   INITIAL_ACCOUNTS,
   INITIAL_BILLS,
@@ -45,7 +47,9 @@ export default function App() {
   const [activeProposal, setActiveProposal] = useState<ActionProposal | null>(null);
   const [isCompetitionModalOpen, setIsCompetitionModalOpen] = useState(false);
   const [isApkModalOpen, setIsApkModalOpen] = useState(false);
+  const [isMobileFrameActive, setIsMobileFrameActive] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const { theme, setTheme, toggleLightDark, isDark, currentThemeMeta } = useTheme();
 
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
@@ -354,7 +358,10 @@ Try asking:
   }
 
   return (
-    <div className="min-h-screen bg-[#07090E] text-slate-100 flex flex-col font-sans selection:bg-emerald-500/30 selection:text-white">
+    <div
+      className="min-h-screen flex flex-col font-sans selection:bg-emerald-500/30 selection:text-white transition-colors duration-200"
+      style={{ backgroundColor: 'var(--app-bg)', color: 'var(--app-text)' }}
+    >
       {/* Header */}
       <Navbar
         activeTab={activeTab}
@@ -364,61 +371,74 @@ Try asking:
         onOpenCompetitionModal={() => setIsCompetitionModalOpen(true)}
         onOpenApkModal={() => setIsApkModalOpen(true)}
         pendingProposalsCount={pendingProposalsCount}
+        isMobileFrameActive={isMobileFrameActive}
+        onToggleMobileFrame={() => setIsMobileFrameActive((prev) => !prev)}
+        currentTheme={theme}
+        onSelectTheme={setTheme}
+        isDark={isDark}
+        onToggleLightDark={toggleLightDark}
       />
 
-      {/* Main Tabbed Content Area */}
-      <main className="flex-1 p-4 sm:p-6 lg:p-8">
-        {activeTab === 'overview' && (
-          <DashboardOverview
-            accounts={accounts}
-            transactions={transactions}
-            budgets={budgets}
-            bills={bills}
-            healthScore={healthScore}
-            recommendations={recommendations}
-            onTriggerRecommendation={handleTriggerRecommendation}
-            onSimulateTransaction={handleSimulateTransaction}
-            onOpenProposal={setActiveProposal}
-          />
-        )}
+      {/* Main Tabbed Content Area Wrapped in Mobile Frame when active */}
+      <MobileDeviceFrame
+        activeTab={activeTab}
+        setActiveTab={setActiveTab}
+        isMobileFrameActive={isMobileFrameActive}
+        onToggleMobileFrame={() => setIsMobileFrameActive((prev) => !prev)}
+      >
+        <main className={`flex-1 ${isMobileFrameActive ? 'p-2' : 'p-4 sm:p-6 lg:p-8'}`}>
+          {activeTab === 'overview' && (
+            <DashboardOverview
+              accounts={accounts}
+              transactions={transactions}
+              budgets={budgets}
+              bills={bills}
+              healthScore={healthScore}
+              recommendations={recommendations}
+              onTriggerRecommendation={handleTriggerRecommendation}
+              onSimulateTransaction={handleSimulateTransaction}
+              onOpenProposal={setActiveProposal}
+            />
+          )}
 
-        {activeTab === 'copilot' && (
-          <ChatAssistant
-            messages={messages}
-            onSendMessage={handleSendMessage}
-            isLoading={isLoading}
-            onApproveProposal={handleApproveProposal}
-            onRejectProposal={handleRejectProposal}
-          />
-        )}
+          {activeTab === 'copilot' && (
+            <ChatAssistant
+              messages={messages}
+              onSendMessage={handleSendMessage}
+              isLoading={isLoading}
+              onApproveProposal={handleApproveProposal}
+              onRejectProposal={handleRejectProposal}
+            />
+          )}
 
-        {activeTab === 'budgeting' && (
-          <SmartBudgeting
-            budgets={budgets}
-            transactions={transactions}
-            onOpenProposal={setActiveProposal}
-          />
-        )}
+          {activeTab === 'budgeting' && (
+            <SmartBudgeting
+              budgets={budgets}
+              transactions={transactions}
+              onOpenProposal={setActiveProposal}
+            />
+          )}
 
-        {activeTab === 'bills' && (
-          <BillsManager
-            bills={bills}
-            accounts={accounts}
-            onOpenProposal={setActiveProposal}
-          />
-        )}
+          {activeTab === 'bills' && (
+            <BillsManager
+              bills={bills}
+              accounts={accounts}
+              onOpenProposal={setActiveProposal}
+            />
+          )}
 
-        {activeTab === 'insights' && (
-          <SpendingInsights transactions={transactions} />
-        )}
+          {activeTab === 'insights' && (
+            <SpendingInsights transactions={transactions} />
+          )}
 
-        {activeTab === 'security' && (
-          <SecurityAuditView
-            auditLogs={auditLogs}
-            onInjectTestPrompt={handleInjectTestPrompt}
-          />
-        )}
-      </main>
+          {activeTab === 'security' && (
+            <SecurityAuditView
+              auditLogs={auditLogs}
+              onInjectTestPrompt={handleInjectTestPrompt}
+            />
+          )}
+        </main>
+      </MobileDeviceFrame>
 
       {/* Proposal Review Modal for Tier 2 Actions */}
       <ProposalModal
@@ -441,14 +461,25 @@ Try asking:
       />
 
       {/* Footer */}
-      <footer className="border-t border-white/[0.08] bg-[#05070B] px-6 py-4 text-center text-xs text-slate-500 flex flex-col sm:flex-row items-center justify-between gap-2 max-w-7xl mx-auto w-full">
+      <footer
+        className="border-t px-6 py-4 text-center text-xs flex flex-col sm:flex-row items-center justify-between gap-2 max-w-7xl mx-auto w-full transition-colors"
+        style={{
+          backgroundColor: 'var(--header-bg)',
+          borderColor: 'var(--header-border)',
+          color: 'var(--app-text-muted)',
+        }}
+      >
         <div className="flex items-center gap-2">
-          <span className="font-bold text-white">FinTrack AI</span>
+          <span className="font-bold" style={{ color: 'var(--app-text)' }}>FinTrack AI</span>
           <span>&bull;</span>
           <span>FinTechathon 2026 WeBank Challenge (Topic A: Personal Finance Assistant)</span>
         </div>
-        <div className="text-[11px] text-slate-400">
-          Zero-Trust 3-Tier Multi-Role Authorization &bull; SHA-256 Cryptographic Audit Ledger
+        <div className="text-[11px] opacity-80 flex items-center gap-2">
+          <span>Zero-Trust 3-Tier Multi-Role Authorization</span>
+          <span>&bull;</span>
+          <span className="font-semibold text-emerald-600 dark:text-emerald-400">
+            Active Theme: {currentThemeMeta.name}
+          </span>
         </div>
       </footer>
     </div>
