@@ -1,319 +1,34 @@
 @import "tailwindcss";
 
-/* -------------------------------------------------------------------------- */
-/* THEME DEFINITIONS & CSS CUSTOM PROPERTIES                                  */
-/* -------------------------------------------------------------------------- */
-
-:root,
-[data-theme="holo-reference"] {
-  --app-bg: #050811;
-  --app-text: #F1F5F9;
-  --app-text-muted: #94A3B8;
-  --app-text-subtle: #64748B;
-  --card-bg: rgba(10, 16, 30, 0.78);
-  --card-border: rgba(0, 242, 254, 0.22);
-  --card-shadow: 0 4px 20px -2px rgba(0, 242, 254, 0.12), 0 0 1px 1px rgba(0, 242, 254, 0.25);
-  --card-shadow-hover: 0 12px 30px -4px rgba(0, 242, 254, 0.25), 0 0 12px 2px rgba(16, 185, 129, 0.35);
-  --header-bg: rgba(5, 8, 17, 0.94);
-  --header-border: rgba(0, 242, 254, 0.22);
-  --banner-bg: linear-gradient(135deg, rgba(6, 182, 212, 0.14) 0%, rgba(16, 185, 129, 0.12) 50%, #060913 100%);
-  --banner-border: rgba(0, 242, 254, 0.35);
-  --badge-emerald-bg: rgba(0, 242, 254, 0.15);
-  --badge-emerald-text: #38BDF8;
-  --badge-emerald-border: rgba(0, 242, 254, 0.45);
-  --dock-bg: rgba(10, 16, 30, 0.7);
-  --dock-border: rgba(0, 242, 254, 0.25);
-  --dock-btn-bg: rgba(0, 242, 254, 0.08);
-  --dock-btn-text: #E2E8F0;
-  --dock-btn-border: rgba(0, 242, 254, 0.25);
-  --scrollbar-thumb: #0EA5E9;
-}
-
-[data-theme="light-reference"] {
-  --app-bg: #F8FAFC;
-  --app-text: #0F172A;
-  --app-text-muted: #64748B;
-  --app-text-subtle: #94A3B8;
-  --card-bg: #FFFFFF;
-  --card-border: #E2E8F0;
-  --card-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px -1px rgba(0, 0, 0, 0.03);
-  --card-shadow-hover: 0 10px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
-  --header-bg: rgba(255, 255, 255, 0.95);
-  --header-border: #E2E8F0;
-  --banner-bg: linear-gradient(135deg, #FFFFFF 0%, #F1F5F9 50%, #ECFDF5 100%);
-  --banner-border: #CBD5E1;
-  --badge-emerald-bg: #ECFDF5;
-  --badge-emerald-text: #065F46;
-  --badge-emerald-border: #A7F3D0;
-  --dock-bg: #FFFFFF;
-  --dock-border: #E2E8F0;
-  --dock-btn-bg: #F1F5F9;
-  --dock-btn-text: #334155;
-  --dock-btn-border: #E2E8F0;
-  --scrollbar-thumb: #CBD5E1;
-}
-
-[data-theme="emerald-mint"] {
-  --app-bg: #F0FDF4;
-  --app-text: #064E3B;
-  --app-text-muted: #047857;
-  --app-text-subtle: #6EE7B7;
-  --card-bg: #FFFFFF;
-  --card-border: #BBF7D0;
-  --card-shadow: 0 2px 6px 0 rgba(16, 185, 129, 0.08);
-  --card-shadow-hover: 0 10px 25px -5px rgba(16, 185, 129, 0.15);
-  --header-bg: rgba(255, 255, 255, 0.95);
-  --header-border: #BBF7D0;
-  --banner-bg: linear-gradient(135deg, #FFFFFF 0%, #DCFCE7 100%);
-  --banner-border: #86EFAC;
-  --badge-emerald-bg: #DCFCE7;
-  --badge-emerald-text: #065F46;
-  --badge-emerald-border: #86EFAC;
-  --dock-bg: #FFFFFF;
-  --dock-border: #BBF7D0;
-  --dock-btn-bg: #DCFCE7;
-  --dock-btn-text: #065F46;
-  --dock-btn-border: #BBF7D0;
-  --scrollbar-thumb: #86EFAC;
-}
-
-[data-theme="indigo-neo"] {
-  --app-bg: #F8FAFC;
-  --app-text: #1E1B4B;
-  --app-text-muted: #4338CA;
-  --app-text-subtle: #818CF8;
-  --card-bg: #FFFFFF;
-  --card-border: #E0E7FF;
-  --card-shadow: 0 2px 6px 0 rgba(99, 102, 241, 0.08);
-  --card-shadow-hover: 0 10px 25px -5px rgba(99, 102, 241, 0.15);
-  --header-bg: rgba(255, 255, 255, 0.95);
-  --header-border: #E0E7FF;
-  --banner-bg: linear-gradient(135deg, #FFFFFF 0%, #EEF2FF 100%);
-  --banner-border: #C7D2FE;
-  --badge-emerald-bg: #EEF2FF;
-  --badge-emerald-text: #3730A3;
-  --badge-emerald-border: #C7D2FE;
-  --dock-bg: #FFFFFF;
-  --dock-border: #E0E7FF;
-  --dock-btn-bg: #EEF2FF;
-  --dock-btn-text: #3730A3;
-  --dock-btn-border: #C7D2FE;
-  --scrollbar-thumb: #C7D2FE;
-}
-
-[data-theme="wallet-rose"] {
-  --app-bg: #FFF1F2;
-  --app-text: #881337;
-  --app-text-muted: #9F1239;
-  --app-text-subtle: #FB7185;
-  --card-bg: #FFFFFF;
-  --card-border: #FECDD3;
-  --card-shadow: 0 2px 6px 0 rgba(225, 29, 72, 0.08);
-  --card-shadow-hover: 0 10px 25px -5px rgba(225, 29, 72, 0.15);
-  --header-bg: rgba(255, 255, 255, 0.95);
-  --header-border: #FECDD3;
-  --banner-bg: linear-gradient(135deg, #FFFFFF 0%, #FFE4E6 100%);
-  --banner-border: #FDA4AF;
-  --badge-emerald-bg: #FFE4E6;
-  --badge-emerald-text: #9F1239;
-  --badge-emerald-border: #FDA4AF;
-  --dock-bg: #FFFFFF;
-  --dock-border: #FECDD3;
-  --dock-btn-bg: #FFE4E6;
-  --dock-btn-text: #9F1239;
-  --dock-btn-border: #FECDD3;
-  --scrollbar-thumb: #FDA4AF;
-}
-
-[data-theme="dark-obsidian"] {
-  --app-bg: #07090E;
-  --app-text: #F8FAFC;
-  --app-text-muted: #94A3B8;
-  --app-text-subtle: #64748B;
-  --card-bg: rgba(15, 23, 42, 0.7);
-  --card-border: rgba(255, 255, 255, 0.08);
-  --card-shadow: 0 4px 14px 0 rgba(0, 0, 0, 0.4);
-  --card-shadow-hover: 0 10px 25px -5px rgba(16, 185, 129, 0.2);
-  --header-bg: rgba(7, 9, 14, 0.92);
-  --header-border: rgba(255, 255, 255, 0.08);
-  --banner-bg: linear-gradient(135deg, #0B101D 0%, #090D18 50%, #05070B 100%);
-  --banner-border: rgba(255, 255, 255, 0.1);
-  --badge-emerald-bg: rgba(16, 185, 129, 0.15);
-  --badge-emerald-text: #6EE7B7;
-  --badge-emerald-border: rgba(16, 185, 129, 0.3);
-  --dock-bg: rgba(255, 255, 255, 0.02);
-  --dock-border: rgba(255, 255, 255, 0.08);
-  --dock-btn-bg: rgba(255, 255, 255, 0.04);
-  --dock-btn-text: #CBD5E1;
-  --dock-btn-border: rgba(255, 255, 255, 0.1);
-  --scrollbar-thumb: #1E293B;
-}
-
-/* -------------------------------------------------------------------------- */
-/* GLOBAL BASE STYLES                                                         */
-/* -------------------------------------------------------------------------- */
-
 @layer base {
   body {
-    background-color: var(--app-bg);
-    color: var(--app-text);
+    background-color: #07090E;
+    color: #F8FAFC;
     font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
     overflow-x: hidden;
-    transition: background-color 0.25s ease, color 0.25s ease;
   }
 }
 
-/* -------------------------------------------------------------------------- */
-/* ADAPTIVE GLASS CARD & THEME CARD                                          */
-/* -------------------------------------------------------------------------- */
-
+/* Obsidian Glass & Aurora Surface Styles */
 .glass-card {
-  background: var(--card-bg);
+  background: rgba(15, 23, 42, 0.65);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid var(--card-border);
-  box-shadow: var(--card-shadow);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .glass-card:hover {
-  box-shadow: var(--card-shadow-hover);
+  border-color: rgba(16, 185, 129, 0.3);
   transform: translateY(-1px);
 }
 
 .glass-card-active {
-  background: var(--badge-emerald-bg);
-  border: 1px solid var(--badge-emerald-border);
+  background: rgba(16, 185, 129, 0.08);
+  border: 1px solid rgba(16, 185, 129, 0.4);
 }
 
-/* -------------------------------------------------------------------------- */
-/* LIGHT THEME ADAPTATION OVERRIDES                                           */
-/* -------------------------------------------------------------------------- */
-
-[data-theme="light-reference"],
-[data-theme="emerald-mint"],
-[data-theme="indigo-neo"],
-[data-theme="wallet-rose"] {
-  /* Override hardcoded dark text elements inside general content */
-  .text-slate-100,
-  .text-slate-200 {
-    color: var(--app-text);
-  }
-
-  .text-slate-300,
-  .text-slate-400 {
-    color: var(--app-text-muted);
-  }
-
-  /* Keep white text white on buttons, pills with dark/colored backgrounds */
-  button.bg-emerald-600,
-  button.bg-gradient-to-r,
-  .bg-emerald-500,
-  .bg-emerald-600,
-  .bg-indigo-600,
-  .bg-rose-600,
-  .credit-card-surface,
-  .credit-card-surface * {
-    /* Retain original vibrant text color */
-  }
-
-  /* Make hardcoded dark containers light */
-  .bg-\[\#07090E\],
-  .bg-\[\#05070B\],
-  .bg-\[\#0B101D\],
-  .bg-\[\#0A0E17\] {
-    background-color: var(--app-bg) !important;
-  }
-
-  .bg-slate-900,
-  .bg-slate-900\/80,
-  .bg-slate-900\/70,
-  .bg-slate-950 {
-    background-color: var(--card-bg) !important;
-    border-color: var(--card-border) !important;
-  }
-
-  .border-white\/\[0\.08\],
-  .border-white\/\[0\.06\],
-  .border-white\/10 {
-    border-color: var(--card-border) !important;
-  }
-
-  /* Hero banner in light themes */
-  .hero-finance-banner {
-    background: var(--banner-bg) !important;
-    border-color: var(--banner-border) !important;
-    box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05) !important;
-  }
-
-  /* Quick action dock in light themes */
-  .quick-action-dock {
-    background-color: var(--dock-bg) !important;
-    border-color: var(--dock-border) !important;
-  }
-
-  .quick-action-pill-subtle {
-    background-color: var(--dock-btn-bg) !important;
-    color: var(--dock-btn-text) !important;
-    border-color: var(--dock-btn-border) !important;
-  }
-
-  /* Header in light themes */
-  header {
-    background-color: var(--header-bg) !important;
-    border-color: var(--header-border) !important;
-  }
-
-  /* Top competition banner */
-  .top-comp-bar {
-    background: var(--card-bg) !important;
-    border-color: var(--card-border) !important;
-    color: var(--app-text-muted) !important;
-  }
-
-  /* Inputs in light themes */
-  input[type="text"],
-  input[type="number"],
-  input[type="search"],
-  select,
-  textarea {
-    background-color: #FFFFFF !important;
-    color: #0F172A !important;
-    border-color: #CBD5E1 !important;
-  }
-
-  input[type="text"]:focus,
-  input[type="number"]:focus,
-  input[type="search"]:focus,
-  select:focus,
-  textarea:focus {
-    border-color: #10B981 !important;
-    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15) !important;
-  }
-
-  /* Tables */
-  thead {
-    background-color: #F8FAFC !important;
-    border-bottom-color: #E2E8F0 !important;
-  }
-
-  thead th {
-    color: #64748B !important;
-  }
-
-  tbody tr {
-    border-bottom-color: #F1F5F9 !important;
-  }
-
-  tbody tr:hover {
-    background-color: #F8FAFC !important;
-  }
-}
-
-/* -------------------------------------------------------------------------- */
-/* SUBTLE GLOW EFFECTS & SCROLLBAR                                            */
-/* -------------------------------------------------------------------------- */
-
+/* Subtle glow effects */
 .glow-emerald-subtle {
   box-shadow: 0 0 30px -10px rgba(16, 185, 129, 0.25);
 }
@@ -322,39 +37,21 @@
   box-shadow: 0 0 30px -10px rgba(99, 102, 241, 0.25);
 }
 
+/* Custom sleek scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: transparent;
+  background: #07090E;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--scrollbar-thumb);
+  background: #1E293B;
   border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
   background: #10B981;
-}
-
-/* -------------------------------------------------------------------------- */
-/* ANIMATIONS                                                                 */
-/* -------------------------------------------------------------------------- */
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(4px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.animate-fadeIn {
-  animation: fadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }

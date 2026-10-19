@@ -154,66 +154,6 @@ export const PublicLandingPage: React.FC<PublicLandingPageProps> = ({
           </div>
         </div>
 
-        {/* Picturesque Reference Scenario Showcase */}
-        <div className="mt-12 w-full relative group">
-          <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden border border-cyan-500/30 shadow-2xl shadow-cyan-950/60 bg-[#050811]">
-            {/* Top Ribbon on Scenario */}
-            <div className="flex flex-wrap items-center justify-between gap-2 px-4 sm:px-6 py-2.5 bg-[#03060C]/90 border-b border-cyan-500/25 text-xs font-mono">
-              <div className="flex items-center gap-2">
-                <span className="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-ping" />
-                <span className="text-cyan-300 font-bold uppercase tracking-wider">PICTURESQUE REFERENCE SCENARIO</span>
-                <span className="text-slate-500 hidden sm:inline">• Holographic Command Suite</span>
-              </div>
-              <div className="flex items-center gap-4 text-slate-300 text-[11px]">
-                <span className="text-emerald-400 font-bold font-mono">DJIA +1.19%</span>
-                <span className="text-cyan-400 font-bold font-mono">PORTFOLIO $7,458,912.45</span>
-                <button
-                  onClick={onLaunchApp}
-                  className="px-2.5 py-1 rounded-lg bg-cyan-500/20 text-cyan-300 hover:bg-cyan-500/30 border border-cyan-400/40 text-[11px] font-semibold transition cursor-pointer flex items-center gap-1"
-                >
-                  <span>Launch Cockpit</span>
-                  <ArrowRight className="w-3 h-3" />
-                </button>
-              </div>
-            </div>
-
-            {/* Scenario Image Frame */}
-            <div className="relative aspect-[16/9] min-h-[300px] max-h-[520px] overflow-hidden">
-              <img
-                src="/hero_fintech_vault.jpg"
-                alt="Picturesque Reference Scenario"
-                className="w-full h-full object-cover filter contrast-105 brightness-95 transition-transform duration-700 group-hover:scale-[1.01]"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#050811] via-transparent to-transparent pointer-events-none" />
-
-              {/* Pulsing Hotspots on the Scenario */}
-              <div className="absolute top-[32%] left-[52%] -translate-x-1/2 -translate-y-1/2 px-3 py-1.5 rounded-full bg-cyan-500/30 border border-cyan-400 text-white font-mono text-xs backdrop-blur-md shadow-lg shadow-cyan-500/40 flex items-center gap-1.5 animate-pulse pointer-events-none">
-                <span className="w-2 h-2 rounded-full bg-cyan-400"></span>
-                <span>PORTFOLIO HUD: $7,458,912.45 (+12.8%)</span>
-              </div>
-
-              <div className="absolute top-[55%] left-[78%] -translate-x-1/2 -translate-y-1/2 px-3 py-1.5 rounded-full bg-emerald-500/30 border border-emerald-400 text-emerald-200 font-mono text-xs backdrop-blur-md shadow-lg shadow-emerald-500/40 flex items-center gap-1.5 pointer-events-none">
-                <span className="w-2 h-2 rounded-full bg-emerald-400"></span>
-                <span>AI FORECASTS: 92% ACCURACY</span>
-              </div>
-
-              <div className="absolute top-[26%] left-[23%] -translate-x-1/2 -translate-y-1/2 px-3 py-1.5 rounded-full bg-cyan-950/80 border border-cyan-400/50 text-cyan-300 font-mono text-xs backdrop-blur-md shadow-lg flex items-center gap-1.5 pointer-events-none">
-                <span className="w-2 h-2 rounded-full bg-cyan-400"></span>
-                <span>MARKET TICKER & ASSET ALLOCATION</span>
-              </div>
-
-              <div className="absolute bottom-6 left-1/2 -translate-x-1/2 px-5 py-2.5 rounded-xl bg-black/85 border border-cyan-500/40 backdrop-blur-md text-center max-w-lg shadow-2xl">
-                <span className="text-xs font-mono text-cyan-300 font-bold block uppercase tracking-wider">
-                  Picturesque Autonomous Finance Scenario
-                </span>
-                <span className="text-[11px] text-slate-300 block mt-0.5">
-                  Real-time trading desk with holographic HUD telemetry, predictive envelopes, and zero-trust Tier-2 human confirmation.
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-
         {/* Live Metrics Floating Bar */}
         <div className="mt-14 w-full grid grid-cols-2 md:grid-cols-4 gap-4 text-left">
           <div className="glass-card rounded-xl p-5 border border-white/10 space-y-1">

@@ -129,7 +129,7 @@ export const NeoCardShowcase: React.FC<NeoCardShowcaseProps> = ({
       {/* Realistic 3D-styled Neo-Card */}
       <div className="relative group">
         <div
-          className={`credit-card-surface relative w-full max-w-md mx-auto aspect-[1.586/1] rounded-2xl p-6 sm:p-7 flex flex-col justify-between overflow-hidden shadow-2xl transition-all duration-300 border bg-gradient-to-br ${currentCard.bgGradient} ${currentCard.borderGlow}`}
+          className={`relative w-full max-w-md mx-auto aspect-[1.586/1] rounded-2xl p-6 sm:p-7 flex flex-col justify-between overflow-hidden shadow-2xl transition-all duration-300 border bg-gradient-to-br ${currentCard.bgGradient} ${currentCard.borderGlow}`}
         >
           {/* Holographic Sheen Layer */}
           <div className="absolute inset-0 bg-gradient-to-tr from-white/[0.04] via-transparent to-white/[0.08] pointer-events-none" />

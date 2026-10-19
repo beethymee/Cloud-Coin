@@ -17,8 +17,6 @@ import {
   Monitor,
 } from 'lucide-react';
 import { FinancialHealthScore } from '../types/finance';
-import { ThemeSelector } from './ThemeSelector';
-import { AppTheme, THEME_OPTIONS } from '../hooks/useTheme';
 
 interface NavbarProps {
   activeTab: string;
@@ -32,10 +30,6 @@ interface NavbarProps {
   onToggleSound?: () => void;
   isMobileFrameActive?: boolean;
   onToggleMobileFrame?: () => void;
-  currentTheme?: AppTheme;
-  onSelectTheme?: (theme: AppTheme) => void;
-  isDark?: boolean;
-  onToggleLightDark?: () => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
@@ -50,10 +44,6 @@ export const Navbar: React.FC<NavbarProps> = ({
   onToggleSound,
   isMobileFrameActive = false,
   onToggleMobileFrame,
-  currentTheme = 'light-reference',
-  onSelectTheme = () => {},
-  isDark = false,
-  onToggleLightDark = () => {},
 }) => {
   const navTabs = [
     { id: 'overview', label: 'Overview', icon: Activity },
@@ -72,32 +62,25 @@ export const Navbar: React.FC<NavbarProps> = ({
   };
 
   return (
-    <header className="sticky top-0 z-40 w-full border-b backdrop-blur-xl transition-colors duration-200" style={{ backgroundColor: 'var(--header-bg)', borderColor: 'var(--header-border)' }}>
+    <header className="sticky top-0 z-40 w-full border-b border-white/[0.08] bg-[#07090E]/90 backdrop-blur-xl">
       {/* Top Competition Bar */}
-      <div className="top-comp-bar border-b px-4 sm:px-6 py-1.5 text-xs flex flex-wrap items-center justify-between gap-2" style={{ borderColor: 'var(--header-border)' }}>
+      <div className="border-b border-white/[0.06] bg-gradient-to-r from-emerald-950/40 via-[#0A0E17] to-cyan-950/40 px-4 sm:px-6 py-1.5 text-xs text-slate-300 flex flex-wrap items-center justify-between gap-2">
         <div className="flex items-center gap-2">
-          <div className="flex items-center gap-1.5 px-2 py-0.5 rounded-md font-semibold bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30 text-[11px] tracking-wide">
-            <Zap className="w-3 h-3 text-emerald-500" />
+          <div className="flex items-center gap-1.5 px-2 py-0.5 rounded-md font-semibold bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 text-[11px] tracking-wide">
+            <Zap className="w-3 h-3 text-emerald-400" />
             <span>FinTechathon 2026</span>
           </div>
-          <span className="text-xs hidden md:inline text-slate-500 dark:text-slate-400">
+          <span className="text-slate-400 text-xs hidden md:inline">
             Topic A: Autonomous Personal Finance Assistant
-          </span>
-          {/* Active Theme Chip */}
-          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-semibold bg-gradient-to-r from-cyan-600 to-emerald-600 text-white shadow-xs">
-            Theme: {THEME_OPTIONS.find((t) => t.id === currentTheme)?.name || 'Holo Scenario'}
-          </span>
-          <span className="text-[11px] font-mono text-cyan-400 hidden xl:inline">
-            ▲ DJIA 39,215 • NASDAQ 18,310 • BTC $69,420
           </span>
         </div>
 
         <div className="flex items-center gap-3 text-xs">
-          <span className="font-mono text-[11px] text-slate-500 dark:text-slate-400">Sandbox Environment</span>
-          <span className="text-slate-300 dark:text-slate-700 hidden sm:inline">·</span>
+          <span className="text-slate-500 font-mono text-[11px]">Sandbox Environment</span>
+          <span className="text-slate-700 hidden sm:inline">·</span>
           <button
             onClick={onOpenCompetitionModal}
-            className="flex items-center gap-1 text-emerald-600 dark:text-emerald-400 hover:text-emerald-500 font-medium transition cursor-pointer"
+            className="flex items-center gap-1 text-emerald-400 hover:text-emerald-300 font-medium transition cursor-pointer"
           >
             <BookOpen className="w-3.5 h-3.5" />
             <span>Rubric (40% Task · 30% Security · 30% Innovation)</span>
@@ -113,27 +96,27 @@ export const Navbar: React.FC<NavbarProps> = ({
           onClick={() => setActiveTab('overview')}
         >
           <div className="relative w-9 h-9 rounded-lg bg-gradient-to-br from-emerald-400 to-cyan-500 p-[1px] shadow-sm">
-            <div className="w-full h-full rounded-[7px] flex items-center justify-center transition-colors" style={{ backgroundColor: isDark ? '#07090E' : '#FFFFFF' }}>
-              <ShieldCheck className="w-4 h-4 text-emerald-500" />
+            <div className="w-full h-full bg-[#07090E] rounded-[7px] flex items-center justify-center">
+              <ShieldCheck className="w-4 h-4 text-emerald-400" />
             </div>
           </div>
           <div className="flex flex-col">
             <div className="flex items-center gap-2">
-              <span className="text-base font-bold tracking-tight" style={{ color: 'var(--app-text)' }}>
-                FinTrack<span className="text-emerald-500">AI</span>
+              <span className="text-base font-bold tracking-tight text-white">
+                FinTrack<span className="text-emerald-400">AI</span>
               </span>
-              <span className="text-[10px] font-mono uppercase tracking-wider px-1.5 py-0.5 bg-slate-100 dark:bg-white/5 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-white/10 rounded">
+              <span className="text-[10px] font-mono uppercase tracking-wider px-1.5 py-0.5 bg-white/5 text-slate-300 border border-white/10 rounded">
                 v2.6
               </span>
             </div>
-            <span className="text-[11px] text-slate-500 dark:text-slate-400 hidden sm:inline">
+            <span className="text-[11px] text-slate-400 hidden sm:inline">
               Smart Financial Participant
             </span>
           </div>
         </div>
 
         {/* Zone 2: Nav Tabs */}
-        <nav className="hidden lg:flex items-center gap-1 p-1 bg-slate-100/80 dark:bg-white/[0.03] border border-slate-200/80 dark:border-white/[0.08] rounded-xl">
+        <nav className="hidden lg:flex items-center gap-1 p-1 bg-white/[0.03] border border-white/[0.08] rounded-lg">
           {navTabs.map((tab) => {
             const Icon = tab.icon;
             const isActive = activeTab === tab.id;
@@ -141,10 +124,10 @@ export const Navbar: React.FC<NavbarProps> = ({
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
-                className={`relative flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all duration-150 cursor-pointer whitespace-nowrap shrink-0 ${
+                className={`relative flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium transition-all duration-150 cursor-pointer whitespace-nowrap shrink-0 ${
                   isActive
-                    ? 'bg-white dark:bg-emerald-500/15 text-emerald-600 dark:text-emerald-300 border border-slate-200 dark:border-emerald-500/30 shadow-xs font-semibold'
-                    : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200/50 dark:hover:bg-white/[0.04]'
+                    ? 'bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 shadow-sm'
+                    : 'text-slate-400 hover:text-white hover:bg-white/[0.04]'
                 }`}
               >
                 <Icon className="w-3.5 h-3.5" />
@@ -160,15 +143,7 @@ export const Navbar: React.FC<NavbarProps> = ({
         </nav>
 
         {/* Zone 3: Actions & Quick Indicators */}
-        <div className="flex items-center gap-2 sm:gap-2.5 shrink-0">
-          {/* Active Theme Selector & Quick Toggle */}
-          <ThemeSelector
-            currentTheme={currentTheme}
-            onSelectTheme={onSelectTheme}
-            isDark={isDark}
-            onToggleLightDark={onToggleLightDark}
-          />
-
+        <div className="flex items-center gap-2 sm:gap-3 shrink-0">
           {/* Health Score Badge */}
           <button
             onClick={() => setActiveTab('overview')}
@@ -243,7 +218,7 @@ export const Navbar: React.FC<NavbarProps> = ({
       </div>
 
       {/* Mobile Horizontal Sub-Navbar */}
-      <div className="lg:hidden flex items-center overflow-x-auto gap-1 px-4 py-2 border-t scrollbar-none transition-colors" style={{ backgroundColor: 'var(--header-bg)', borderColor: 'var(--header-border)' }}>
+      <div className="lg:hidden flex items-center overflow-x-auto gap-1 px-4 py-2 border-t border-white/[0.06] bg-[#07090E] scrollbar-none">
         {navTabs.map((tab) => {
           const Icon = tab.icon;
           const isActive = activeTab === tab.id;
@@ -253,8 +228,8 @@ export const Navbar: React.FC<NavbarProps> = ({
               onClick={() => setActiveTab(tab.id)}
               className={`whitespace-nowrap flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-medium transition cursor-pointer shrink-0 ${
                 isActive
-                  ? 'bg-emerald-600 text-white shadow-xs font-semibold'
-                  : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/[0.04]'
+                  ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30'
+                  : 'text-slate-400 hover:text-white hover:bg-white/[0.04]'
               }`}
             >
               <Icon className="w-3 h-3" />

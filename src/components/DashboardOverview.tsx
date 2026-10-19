@@ -45,7 +45,6 @@ import { QuickAddExpenseModal } from './QuickAddExpenseModal';
 import { SendMoneyModal } from './SendMoneyModal';
 import { ReceiptScanModal } from './ReceiptScanModal';
 import { BookkeeperLedgerView } from './BookkeeperLedgerView';
-import { PicturesqueScenarioHero } from './PicturesqueScenarioHero';
 
 interface DashboardOverviewProps {
   accounts: Account[];
@@ -70,8 +69,8 @@ export const DashboardOverview: React.FC<DashboardOverviewProps> = ({
   onSimulateTransaction,
   onOpenProposal,
 }) => {
-  // View mode switcher: 'scenario' (Reference Holo-Scenario), 'neobank', or 'ledger'
-  const [viewMode, setViewMode] = useState<'scenario' | 'neobank' | 'ledger'>('scenario');
+  // View mode switcher: 'neobank' or 'ledger'
+  const [viewMode, setViewMode] = useState<'neobank' | 'ledger'>('neobank');
 
   // Modals
   const [isQuickAddOpen, setIsQuickAddOpen] = useState(false);
@@ -177,27 +176,15 @@ export const DashboardOverview: React.FC<DashboardOverviewProps> = ({
   return (
     <div className="space-y-8 max-w-7xl mx-auto pb-12 animate-fadeIn">
       {/* Top Controls: Mode Switcher & Quick Action Hub */}
-      <div className="quick-action-dock flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 p-2.5 rounded-2xl border transition-colors">
-        {/* Aesthetic View Switcher: Reference Scenario vs Neo-Bank vs Ledger */}
-        <div className="flex items-center gap-1.5 p-1 bg-slate-100 dark:bg-white/[0.04] rounded-xl border border-slate-200 dark:border-white/[0.08] overflow-x-auto">
-          <button
-            onClick={() => setViewMode('scenario')}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition cursor-pointer whitespace-nowrap ${
-              viewMode === 'scenario'
-                ? 'bg-gradient-to-r from-cyan-600 via-teal-600 to-emerald-600 text-white shadow-xs font-bold'
-                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
-            }`}
-          >
-            <Sparkles className="w-3.5 h-3.5 text-cyan-300" />
-            <span>Picturesque Scenario</span>
-            <span className="text-[10px] px-1 py-0.2 rounded bg-black/40 text-cyan-200 font-mono">Reference</span>
-          </button>
+      <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 bg-white/[0.02] p-2.5 rounded-2xl border border-white/[0.08]">
+        {/* Aesthetic View Switcher: Neo-Bank vs Classic Ledger */}
+        <div className="flex items-center gap-1.5 p-1 bg-white/[0.04] rounded-xl border border-white/[0.08]">
           <button
             onClick={() => setViewMode('neobank')}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition cursor-pointer whitespace-nowrap ${
+            className={`flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-semibold transition cursor-pointer ${
               viewMode === 'neobank'
-                ? 'bg-emerald-600 text-white shadow-xs font-bold'
-                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+                ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 shadow-sm'
+                : 'text-slate-400 hover:text-white'
             }`}
           >
             <CreditCard className="w-3.5 h-3.5" />
@@ -205,10 +192,10 @@ export const DashboardOverview: React.FC<DashboardOverviewProps> = ({
           </button>
           <button
             onClick={() => setViewMode('ledger')}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition cursor-pointer whitespace-nowrap ${
+            className={`flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-semibold transition cursor-pointer ${
               viewMode === 'ledger'
-                ? 'bg-amber-600 text-white shadow-xs font-bold'
-                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+                ? 'bg-amber-500/20 text-amber-300 border border-amber-500/40 shadow-sm'
+                : 'text-slate-400 hover:text-white'
             }`}
           >
             <BookOpen className="w-3.5 h-3.5" />
@@ -220,7 +207,7 @@ export const DashboardOverview: React.FC<DashboardOverviewProps> = ({
         <div className="flex items-center gap-2 overflow-x-auto pb-1 sm:pb-0 scrollbar-none">
           <button
             onClick={() => setIsQuickAddOpen(true)}
-            className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-bold bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white shadow-md shadow-emerald-950/20 border border-emerald-400/30 transition cursor-pointer whitespace-nowrap shrink-0"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white shadow-md shadow-emerald-950/40 border border-emerald-400/30 transition cursor-pointer whitespace-nowrap shrink-0"
           >
             <Plus className="w-3.5 h-3.5 stroke-[3]" />
             <span>+ Add Expense</span>
@@ -228,25 +215,25 @@ export const DashboardOverview: React.FC<DashboardOverviewProps> = ({
 
           <button
             onClick={() => setIsSendMoneyOpen(true)}
-            className="quick-action-pill-subtle flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold border transition cursor-pointer whitespace-nowrap shrink-0 hover:border-cyan-400"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold bg-white/[0.04] hover:bg-white/[0.08] text-slate-300 hover:text-white border border-white/10 transition cursor-pointer whitespace-nowrap shrink-0"
           >
-            <Send className="w-3.5 h-3.5 text-cyan-500" />
+            <Send className="w-3.5 h-3.5 text-cyan-400" />
             <span>Send Money</span>
           </button>
 
           <button
             onClick={() => setIsReceiptScanOpen(true)}
-            className="quick-action-pill-subtle flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold border transition cursor-pointer whitespace-nowrap shrink-0 hover:border-purple-400"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold bg-white/[0.04] hover:bg-white/[0.08] text-slate-300 hover:text-white border border-white/10 transition cursor-pointer whitespace-nowrap shrink-0"
           >
-            <Camera className="w-3.5 h-3.5 text-purple-500" />
+            <Camera className="w-3.5 h-3.5 text-purple-400" />
             <span>Scan Receipt</span>
           </button>
 
           <button
             onClick={() => onTriggerRecommendation('How can I optimize the idle cash in my checking account?')}
-            className="quick-action-pill-subtle flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold border transition cursor-pointer whitespace-nowrap shrink-0 hover:border-amber-400"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold bg-white/[0.04] hover:bg-white/[0.08] text-slate-300 hover:text-white border border-white/10 transition cursor-pointer whitespace-nowrap shrink-0"
           >
-            <Sparkles className="w-3.5 h-3.5 text-amber-500" />
+            <Sparkles className="w-3.5 h-3.5 text-amber-400" />
             <span>Ask Copilot</span>
           </button>
         </div>
@@ -257,77 +244,64 @@ export const DashboardOverview: React.FC<DashboardOverviewProps> = ({
         <BookkeeperLedgerView transactions={transactions} accounts={accounts} />
       ) : (
         <>
-          {/* Top Hero Section: Picturesque Scenario vs Standard Neo-Bank Banner */}
-          {viewMode === 'scenario' ? (
-            <PicturesqueScenarioHero
-              healthScore={healthScore}
-              accounts={accounts}
-              transactions={transactions}
-              budgets={budgets}
-              bills={bills}
-              onOpenCopilot={() => onTriggerRecommendation('Analyze my overall financial position and simulate portfolio rebalancing based on the holographic command scenario')}
-              onSimulateTransaction={() => onSimulateTransaction('Trading Desk Real-Time Sweep', -350, 'Savings & Investments', accounts[0]?.id || 'acc_1')}
-            />
-          ) : (
-            /* Hero Financial Status Banner */
-            <div className="hero-finance-banner relative overflow-hidden rounded-3xl border p-6 sm:p-8 transition-colors">
-              {/* Ambient Spotlight Glow */}
-              <div className="absolute -top-24 -right-24 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
-              <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none" />
+          {/* Hero Financial Status Banner */}
+          <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#0B101D] via-[#090D18] to-[#05070B] border border-white/10 p-6 sm:p-8 shadow-2xl">
+            {/* Ambient Spotlight Glow */}
+            <div className="absolute -top-24 -right-24 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none" />
 
-              <div className="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
-                <div className="space-y-3">
-                  <div className="flex items-center gap-2">
-                    <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-semibold bg-emerald-500/15 text-emerald-600 dark:text-emerald-300 border border-emerald-500/30">
-                      <ShieldCheck className="w-3.5 h-3.5 text-emerald-500" />
-                      Autonomous FinTech Participant
-                    </span>
-                    <span className="text-slate-500 dark:text-slate-400 text-xs font-mono">
-                      Real-Time Health: {healthScore.overall}/100 ({healthScore.grade})
-                    </span>
-                  </div>
-
-                  <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight" style={{ color: 'var(--app-text)' }}>
-                    Financial Command Center
-                  </h1>
-
-                  <p className="text-sm max-w-2xl leading-relaxed" style={{ color: 'var(--app-text-muted)' }}>
-                    AI-driven multi-account surveillance, predictive cash-flow forecasting, and automated Tier-2 proposal engine tailored for FinTechathon 2026.
-                  </p>
+            <div className="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+              <div className="space-y-3">
+                <div className="flex items-center gap-2">
+                  <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-semibold bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">
+                    <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
+                    Autonomous FinTech Participant
+                  </span>
+                  <span className="text-slate-400 text-xs font-mono">
+                    Real-Time Health: {healthScore.overall}/100 ({healthScore.grade})
+                  </span>
                 </div>
 
-                {/* Quick Net Worth Snapshot */}
-                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-5 glass-card p-5 rounded-2xl shrink-0">
-                  <div>
-                    <span className="text-xs font-medium block uppercase tracking-wider" style={{ color: 'var(--app-text-muted)' }}>
-                      Total Net Liquidity
-                    </span>
-                    <div className="text-3xl sm:text-4xl font-extrabold font-mono tracking-tight tabular-nums" style={{ color: 'var(--app-text)' }}>
-                      {formatCurrency(netWorth)}
-                    </div>
-                    <div className="flex items-center gap-2 text-xs mt-1 text-slate-400">
-                      <span className="text-emerald-400 font-semibold flex items-center gap-0.5">
-                        <ArrowUpRight className="w-3 h-3" /> +14.2%
-                      </span>
-                      <span>vs previous cycle</span>
-                    </div>
-                  </div>
+                <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white">
+                  Financial Command Center
+                </h1>
 
-                  <div className="h-px sm:h-12 sm:w-px bg-white/10 my-1 sm:my-0" />
+                <p className="text-sm text-slate-300 max-w-2xl leading-relaxed">
+                  AI-driven multi-account surveillance, predictive cash-flow forecasting, and automated Tier-2 proposal engine tailored for FinTechathon 2026.
+                </p>
+              </div>
 
-                  <div className="flex flex-col justify-center">
-                    <span className="text-xs text-slate-400">Daily Safe Burn</span>
-                    <span className="text-xl font-bold font-mono text-emerald-400 tabular-nums">
-                      ${dailyAllowance.toFixed(2)}/day
-                    </span>
-                    <span className="text-[11px] text-slate-500">
-                      Runway: {healthScore.metrics.emergencyMonthsCovered} mo reserves
-                    </span>
+              {/* Quick Net Worth Snapshot */}
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-5 bg-white/[0.03] border border-white/10 p-5 rounded-2xl shrink-0">
+                <div>
+                  <span className="text-xs font-medium text-slate-400 block uppercase tracking-wider">
+                    Total Net Liquidity
+                  </span>
+                  <div className="text-3xl sm:text-4xl font-extrabold font-mono tracking-tight text-white tabular-nums">
+                    {formatCurrency(netWorth)}
                   </div>
+                  <div className="flex items-center gap-2 text-xs mt-1 text-slate-400">
+                    <span className="text-emerald-400 font-semibold flex items-center gap-0.5">
+                      <ArrowUpRight className="w-3 h-3" /> +14.2%
+                    </span>
+                    <span>vs previous cycle</span>
+                  </div>
+                </div>
+
+                <div className="h-px sm:h-12 sm:w-px bg-white/10 my-1 sm:my-0" />
+
+                <div className="flex flex-col justify-center">
+                  <span className="text-xs text-slate-400">Daily Safe Burn</span>
+                  <span className="text-xl font-bold font-mono text-emerald-400 tabular-nums">
+                    ${dailyAllowance.toFixed(2)}/day
+                  </span>
+                  <span className="text-[11px] text-slate-500">
+                    Runway: {healthScore.metrics.emergencyMonthsCovered} mo reserves
+                  </span>
                 </div>
               </div>
             </div>
-          )}
+          </div>
 
           {/* Section: Neo-Card Showcase & Category Burn Velocity Side-by-Side */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">

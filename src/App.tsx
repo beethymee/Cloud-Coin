@@ -11,7 +11,6 @@ import { CompetitionModal } from './components/CompetitionModal';
 import { ApkInstallModal } from './components/ApkInstallModal';
 import { PublicLandingPage } from './components/PublicLandingPage';
 import { MobileDeviceFrame } from './components/MobileDeviceFrame';
-import { useTheme } from './hooks/useTheme';
 import {
   INITIAL_ACCOUNTS,
   INITIAL_BILLS,
@@ -49,7 +48,6 @@ export default function App() {
   const [isApkModalOpen, setIsApkModalOpen] = useState(false);
   const [isMobileFrameActive, setIsMobileFrameActive] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const { theme, setTheme, toggleLightDark, isDark, currentThemeMeta } = useTheme();
 
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
@@ -358,10 +356,7 @@ Try asking:
   }
 
   return (
-    <div
-      className="min-h-screen flex flex-col font-sans selection:bg-emerald-500/30 selection:text-white transition-colors duration-200"
-      style={{ backgroundColor: 'var(--app-bg)', color: 'var(--app-text)' }}
-    >
+    <div className="min-h-screen bg-[#07090E] text-slate-100 flex flex-col font-sans selection:bg-emerald-500/30 selection:text-white">
       {/* Header */}
       <Navbar
         activeTab={activeTab}
@@ -373,10 +368,6 @@ Try asking:
         pendingProposalsCount={pendingProposalsCount}
         isMobileFrameActive={isMobileFrameActive}
         onToggleMobileFrame={() => setIsMobileFrameActive((prev) => !prev)}
-        currentTheme={theme}
-        onSelectTheme={setTheme}
-        isDark={isDark}
-        onToggleLightDark={toggleLightDark}
       />
 
       {/* Main Tabbed Content Area Wrapped in Mobile Frame when active */}
@@ -461,25 +452,14 @@ Try asking:
       />
 
       {/* Footer */}
-      <footer
-        className="border-t px-6 py-4 text-center text-xs flex flex-col sm:flex-row items-center justify-between gap-2 max-w-7xl mx-auto w-full transition-colors"
-        style={{
-          backgroundColor: 'var(--header-bg)',
-          borderColor: 'var(--header-border)',
-          color: 'var(--app-text-muted)',
-        }}
-      >
+      <footer className="border-t border-white/[0.08] bg-[#05070B] px-6 py-4 text-center text-xs text-slate-500 flex flex-col sm:flex-row items-center justify-between gap-2 max-w-7xl mx-auto w-full">
         <div className="flex items-center gap-2">
-          <span className="font-bold" style={{ color: 'var(--app-text)' }}>FinTrack AI</span>
+          <span className="font-bold text-white">FinTrack AI</span>
           <span>&bull;</span>
           <span>FinTechathon 2026 WeBank Challenge (Topic A: Personal Finance Assistant)</span>
         </div>
-        <div className="text-[11px] opacity-80 flex items-center gap-2">
-          <span>Zero-Trust 3-Tier Multi-Role Authorization</span>
-          <span>&bull;</span>
-          <span className="font-semibold text-emerald-600 dark:text-emerald-400">
-            Active Theme: {currentThemeMeta.name}
-          </span>
+        <div className="text-[11px] text-slate-400">
+          Zero-Trust 3-Tier Multi-Role Authorization &bull; SHA-256 Cryptographic Audit Ledger
         </div>
       </footer>
     </div>
